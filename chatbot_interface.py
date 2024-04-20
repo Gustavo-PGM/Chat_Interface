@@ -4,14 +4,13 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 
-# Função para buscar resposta na web usando a API do DuckDuckGo
 def buscar_web_duckduckgo(pergunta):
     try:
         url = "https://api.duckduckgo.com"
         params = {
             "q": pergunta,
             "format": "json",
-            "lang": "pt-br"  # Definindo o idioma da busca como Português Brasileiro
+            "lang": "pt-br"
         }
         response = requests.get(url, params=params)
         if response.status_code == 200:
@@ -23,7 +22,6 @@ def buscar_web_duckduckgo(pergunta):
         print(f"Erro na busca web: {e}")
         return None
 
-# Função para buscar resposta na web usando a API do Google
 def buscar_web_google(pergunta):
     try:
         resposta_web = requests.get(f'https://www.google.com/search?q={pergunta}')
@@ -35,19 +33,17 @@ def buscar_web_google(pergunta):
         print(f"Erro na busca web: {e}")
         return None
 
-# Função para enviar pergunta
 def enviar_pergunta(event=None):
     pergunta = pergunta_entry.get().strip().lower()
     if pergunta:
-        resposta_text.delete(1.0, tk.END)  # Limpa o campo de texto das respostas
+        resposta_text.delete(1.0, tk.END)
         resposta_text.insert(tk.END, f"Você: {pergunta}\n", 'pergunta')
         
         resposta_text.insert(tk.END, "Chatbot: Pesquisando...\n\n", 'pesquisa')
         threading.Thread(target=buscar_e_responder, args=(pergunta,)).start()
             
-        pergunta_entry.delete(0, tk.END)  # Limpa o campo de entrada
+        pergunta_entry.delete(0, tk.END)
 
-# Função para buscar e responder após pesquisa na web
 def buscar_e_responder(pergunta):
     resposta_web = buscar_web_duckduckgo(pergunta)
     if not resposta_web:
@@ -61,7 +57,6 @@ def buscar_e_responder(pergunta):
     else:
         resposta_text.insert(tk.END, f"Chatbot: {resposta_web}\n\n", 'resposta')
 
-# Função principal do chatbot
 def chatbot():
     root = tk.Tk()
     root.title("Chatbot")
@@ -87,9 +82,9 @@ def chatbot():
     resposta_text = scrolledtext.ScrolledText(frame, wrap=tk.WORD, width=60, height=20)
     resposta_text.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky=(tk.W, tk.E))
 
-    resposta_text.tag_config('pergunta', foreground='#000000')  # Define a cor da pergunta como preto
-    resposta_text.tag_config('pesquisa', foreground='#555555')  # Define a cor do texto de pesquisa como cinza escuro
-    resposta_text.tag_config('resposta', foreground='#000000')  # Define a cor da resposta como preto
+    resposta_text.tag_config('pergunta', foreground='#000000')
+    resposta_text.tag_config('pesquisa', foreground='#555555')
+    resposta_text.tag_config('resposta', foreground='#000000')
 
     root.mainloop()
 
