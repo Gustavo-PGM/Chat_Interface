@@ -19,7 +19,7 @@ Este é um simples chatbot desenvolvido em Python utilizando a biblioteca Tkinte
 Você pode instalar as dependências executando o seguinte comando no terminal:
 
 ```
-pip install -r requirements.txt
+pip install tkinter requests beautifulsoup4
 ```
 
 **Créditos:**
