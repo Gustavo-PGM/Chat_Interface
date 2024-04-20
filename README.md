@@ -32,4 +32,4 @@ Este projeto foi desenvolvido como parte de um exercício de implementação de 
 
 **Nota:**
 
-Este chatbot foi desenvolvido apenas para fins educacionais e pode não ser adequado para uso em produção. Use-o com moderação e respeite os termos de serviço das APIs utilizadas.
+Este chatbot foi desenvolvido apenas para fins educacionais e pode não ser adequado para uso em produção. Use-o com moderação.
